@@ -1,0 +1,31 @@
+# Azure ML command job: train the shipped live-metric model (synthetic, iforest) and the
+# SMD / NAB evaluation runs. Submit with `python -m ml.azureml.submit` (stages ml/ into
+# ./src first, ensures workspace + compute, then submits this file).
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+display_name: vm-anomaly-train
+experiment_name: vm-anomaly-detector
+description: IsolationForest on synthetic live VM metrics (shipped) + SMD/NAB evaluation.
+code: ./src
+command: >-
+  python -m ml.train --dataset synthetic --model iforest --window ${{inputs.window}}
+  --out ${{outputs.model}} &&
+  python -m ml.train --dataset smd --model iforest --window ${{inputs.window}}
+  --out ${{outputs.eval}}/smd-iforest &&
+  python -m ml.train --dataset smd --model sr --window ${{inputs.window}}
+  --out ${{outputs.eval}}/smd-sr &&
+  python -m ml.train --dataset nab --model iforest --window ${{inputs.window}}
+  --out ${{outputs.eval}}/nab-iforest &&
+  python -m ml.evaluate --runs ${{outputs.model}} ${{outputs.eval}}/smd-iforest
+  ${{outputs.eval}}/smd-sr ${{outputs.eval}}/nab-iforest --report ${{outputs.eval}}/results.md
+inputs:
+  window: 30
+outputs:
+  model:
+    type: uri_folder
+  eval:
+    type: uri_folder
+environment:
+  name: vm-anomaly-train
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu22.04:latest
+  conda_file: ./env.yaml
+compute: azureml:cpu-ds3v2

@@ -1,0 +1,74 @@
+name: Deploy demo app
+
+on:
+  push:
+    branches: [main]
+    paths: ['app/**']
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Git ref to deploy
+        required: true
+        default: main
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: read
+
+jobs:
+  # A merge to main deploys only when its pull request carries the `deploy`
+  # label; manual dispatch always deploys.
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      deploy: ${{ steps.check.outputs.deploy }}
+    steps:
+      - id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          labels="$(gh api "repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA/pulls" \
+            --jq '[.[].labels[].name] | join(",")')"
+          if [[ ",$labels," == *",deploy,"* ]]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Not deploying: the merged pull request has no deploy label"
+          fi
+
+  deploy:
+    needs: gate
+    if: needs.gate.outputs.deploy == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      # Configure the main-branch OIDC subject for this repository; see docs/08-github-actions-setup.md.
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Deploy and check /version
+        env:
+          DEPLOY_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || github.sha }}
+        run: |
+          set -euo pipefail
+          git fetch origin
+          ref="$DEPLOY_REF"
+          if ! git rev-parse --verify "$ref^{commit}" >/dev/null 2>&1; then
+            ref="origin/$ref"
+          fi
+          sha="$(git rev-parse --short=12 "$ref^{commit}")"
+          output="$(scripts/deploy_app.sh "$ref")"
+          echo "$output"
+          version="$(grep -o '"version": "[^"]*"' <<< "$output" | tail -1)"
+          [[ "$version" == *"$sha\"" ]] || { echo "deployed $version, expected $sha" >&2; exit 1; }

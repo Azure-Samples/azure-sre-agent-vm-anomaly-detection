@@ -1,0 +1,12 @@
+- name: incident
+  color: d73a4a
+  description: Production anomaly requiring an incident response
+- name: approved
+  color: 0e8a16
+  description: Human approved the issue fix plan for coding-agent dispatch
+- name: sre-agent
+  color: 1d76db
+  description: Incident investigated by Azure SRE Agent
+- name: deploy
+  color: fbca04
+  description: Merging this pull request deploys app/ to vm-app-01

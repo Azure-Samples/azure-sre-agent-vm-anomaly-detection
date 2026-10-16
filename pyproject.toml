@@ -1,0 +1,24 @@
+[project]
+name = "anomaly-detection-vms"
+version = "0.1.0"
+description = "Azure SRE Agent demo: ML-based VM anomaly detection (alerting -> triage -> RCA -> fix)"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.26",
+  "pandas>=2.1",
+  "scikit-learn>=1.4",
+  "joblib>=1.3",
+]
+
+[project.optional-dependencies]
+ml = ["azure-ai-ml>=1.15", "azure-identity>=1.15", "matplotlib>=3.8", "requests>=2.31", "torch>=2.2"]
+detector = ["azure-functions>=1.18", "azure-identity>=1.15", "azure-monitor-query>=1.3", "azure-monitor-ingestion>=1.0"]
+dashboard = ["azure-identity>=1.15", "azure-monitor-query>=1.3"]
+dev = ["pytest>=8", "ruff>=0.5", "PyYAML==6.0.3"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

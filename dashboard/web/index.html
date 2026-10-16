@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VM anomaly response · status</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{"imports":{"three":"./vendor/three/three.module.js","three/addons/":"./vendor/three/addons/"}}</script>
+<script type="module" src="main.js"></script>
+</head>
+<body>
+<div id="scene" aria-hidden="true"></div>
+<header id="topbar">
+  <h1>VM anomaly response <span id="mode" class="badge">…</span></h1>
+  <div id="banner" class="banner" aria-live="polite">Connecting…</div>
+  <div id="env"></div>
+</header>
+<div id="controls" role="group" aria-label="Scenario controls"></div>
+<aside id="left" class="column">
+  <section id="detector" class="panel" aria-label="Detector"></section>
+  <section id="vm" class="panel" aria-label="Virtual machine"></section>
+</aside>
+<aside id="right" class="column">
+  <section id="agent" class="panel" aria-label="SRE Agent"></section>
+  <section id="ticket" class="panel" aria-label="Alerts, ticket and delivery"></section>
+</aside>
+<nav id="timeline" aria-label="Incident stages"></nav>
+<footer id="bottom">
+  <section id="events" class="panel" aria-label="Events"></section>
+  <section id="legend" class="panel" aria-label="Legend">
+    <h2>Legend</h2>
+    <ul class="legend">
+      <li><i class="dot s-healthy"></i>healthy</li>
+      <li><i class="dot s-warning"></i>warning</li>
+      <li><i class="dot s-anomaly"></i>anomaly / fired</li>
+      <li><i class="dot s-waiting"></i>waiting for human</li>
+      <li><i class="dot s-idle"></i>idle / not started</li>
+      <li><i class="dot stale"></i>stale source</li>
+    </ul>
+    <p class="hint"><span class="arrow">↗</span> click any item to open its source page · keys: <kbd>D</kbd> director <span id="director-state"></span> · <kbd>1</kbd>–<kbd>4</kbd> pin stage · <kbd>0</kbd> unpin</p>
+  </section>
+</footer>
+<div id="tooltip" role="tooltip" hidden></div>
+</body>
+</html>

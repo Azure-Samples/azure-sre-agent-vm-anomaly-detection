@@ -1,0 +1,243 @@
+{
+  "model": "iforest",
+  "features": [
+    "mem_used_pct__slope",
+    "mem_available_mb__slope",
+    "swap_used_pct__slope",
+    "cpu_pct__min",
+    "disk_used_pct__slope"
+  ],
+  "window": 30,
+  "threshold": 0.8,
+  "trained_on": "synthetic live-metric VMs: 24 anomaly-free train series x 4320 min, 4 test series with 2 memory leaks (10-20 MB/min on 4 GB), 1 CPU saturation and 1 disk fill each",
+  "metrics": {
+    "per_series": {
+      "synthetic-0": {
+        "threshold": 0.8,
+        "precision": 0.9732360097323601,
+        "recall": 0.8771929824561403,
+        "f1": 0.922722029988466,
+        "pa_precision": 0.9764453961456103,
+        "pa_recall": 1.0,
+        "pa_f1": 0.9880823401950163,
+        "segments": 4,
+        "segments_detected": 4,
+        "mean_delay": 14.0,
+        "false_alarm_events": 4,
+        "n": 4291,
+        "anomaly_ratio": 0.1062689349801911
+      },
+      "synthetic-1": {
+        "threshold": 0.8,
+        "precision": 0.9688888888888889,
+        "recall": 0.9121338912133892,
+        "f1": 0.9396551724137931,
+        "pa_precision": 0.9715447154471545,
+        "pa_recall": 1.0,
+        "pa_f1": 0.9855670103092783,
+        "segments": 3,
+        "segments_detected": 3,
+        "mean_delay": 14.0,
+        "false_alarm_events": 6,
+        "n": 4291,
+        "anomaly_ratio": 0.11139594500116523
+      },
+      "synthetic-2": {
+        "threshold": 0.8,
+        "precision": 0.9933920704845814,
+        "recall": 0.8895463510848126,
+        "f1": 0.9386056191467221,
+        "pa_precision": 0.9941176470588236,
+        "pa_recall": 1.0,
+        "pa_f1": 0.9970501474926253,
+        "segments": 4,
+        "segments_detected": 4,
+        "mean_delay": 14.0,
+        "false_alarm_events": 1,
+        "n": 4291,
+        "anomaly_ratio": 0.11815427639244931
+      },
+      "synthetic-3": {
+        "threshold": 0.8,
+        "precision": 0.9959266802443992,
+        "recall": 0.8907103825136612,
+        "f1": 0.9403846153846154,
+        "pa_precision": 0.9963702359346642,
+        "pa_recall": 1.0,
+        "pa_f1": 0.9981818181818182,
+        "segments": 4,
+        "segments_detected": 4,
+        "mean_delay": 15.0,
+        "false_alarm_events": 0,
+        "n": 4291,
+        "anomaly_ratio": 0.12794220461430902
+      }
+    },
+    "mean": {
+      "precision": 0.9828609123375575,
+      "recall": 0.8923959018170008,
+      "f1": 0.9353418592333991,
+      "pa_precision": 0.9846194986465631,
+      "pa_recall": 1.0,
+      "pa_f1": 0.9922203290446845,
+      "mean_delay": 14.25,
+      "segments": 15,
+      "segments_detected": 15,
+      "false_alarm_events": 11,
+      "n": 17164
+    },
+    "best_f1_mean": {
+      "precision": 0.990617395820864,
+      "recall": 0.8945702782491729,
+      "f1": 0.9400885600151876,
+      "pa_precision": 0.991593773987929,
+      "pa_recall": 1.0,
+      "pa_f1": 0.9957768163252492,
+      "mean_delay": 13.583333333333334,
+      "segments": 15,
+      "segments_detected": 15,
+      "false_alarm_events": 7,
+      "n": 17164
+    },
+    "baselines": {
+      "iforest + 3-of-5 alert rule": {
+        "precision": 0.9710776336373678,
+        "recall": 0.8772841011658256,
+        "f1": 0.9217490222057558,
+        "pa_precision": 0.9745793226549675,
+        "pa_recall": 1.0,
+        "pa_f1": 0.9871095932148353,
+        "mean_delay": 16.25,
+        "segments": 15,
+        "segments_detected": 15,
+        "false_alarm_events": 3,
+        "n": 17164,
+        "rule": "3 of 5 min"
+      },
+      "static threshold": {
+        "precision": 0.75,
+        "recall": 0.03434669161505957,
+        "f1": 0.06513460703430307,
+        "pa_precision": 0.75,
+        "pa_recall": 0.3757718196329897,
+        "pa_f1": 0.49187346153365574,
+        "mean_delay": 174.66666666666666,
+        "segments": 15,
+        "segments_detected": 4,
+        "false_alarm_events": 0,
+        "n": 17164,
+        "rule": "mem_used_pct > 90"
+      },
+      "static metric alert": {
+        "precision": 0.75,
+        "recall": 0.006320628259302182,
+        "f1": 0.012470957034851559,
+        "pa_precision": 0.75,
+        "pa_recall": 0.3757718196329897,
+        "pa_f1": 0.49187346153365574,
+        "mean_delay": 189.16666666666666,
+        "segments": 15,
+        "segments_detected": 4,
+        "false_alarm_events": 0,
+        "n": 17164,
+        "rule": "mem_available_mb < 200"
+      }
+    }
+  },
+  "dataset": "synthetic",
+  "input_columns": [
+    "mem_used_pct",
+    "mem_available_mb",
+    "swap_used_pct",
+    "cpu_pct",
+    "disk_used_pct",
+    "net_bytes"
+  ],
+  "per_series": false,
+  "directions": {
+    "mem_used_pct__slope": 1,
+    "mem_available_mb__slope": -1,
+    "swap_used_pct__slope": 1,
+    "cpu_pct__min": 1,
+    "disk_used_pct__slope": 1
+  },
+  "groups": {
+    "memory": {
+      "features": [
+        "mem_used_pct__slope",
+        "mem_available_mb__slope",
+        "swap_used_pct__slope"
+      ],
+      "calibration": {
+        "q50": 0.40373123724622056,
+        "qhi": 0.7978275389321247,
+        "anchor": 0.8,
+        "quantile": 0.999
+      }
+    },
+    "cpu": {
+      "features": [
+        "cpu_pct__min"
+      ],
+      "calibration": {
+        "q50": 0.3700955288665197,
+        "qhi": 0.7079356764788614,
+        "anchor": 0.8,
+        "quantile": 0.999
+      }
+    },
+    "disk": {
+      "features": [
+        "disk_used_pct__slope"
+      ],
+      "calibration": {
+        "q50": 0.3570365511740976,
+        "qhi": 0.8165876688328979,
+        "anchor": 0.8,
+        "quantile": 0.999
+      }
+    }
+  },
+  "calibration": {
+    "q50": 0.0,
+    "qhi": 0.8,
+    "anchor": 0.8,
+    "quantile": 0.999
+  },
+  "feature_stats": {
+    "mem_used_pct__slope": {
+      "q50": 0.004627211454152111,
+      "qhi": 0.09766596936113477,
+      "direction": 1
+    },
+    "mem_available_mb__slope": {
+      "q50": 0.1672685235776325,
+      "qhi": 4.338354324225565,
+      "direction": -1
+    },
+    "swap_used_pct__slope": {
+      "q50": 0.0,
+      "qhi": 0.0027742426539219965,
+      "direction": 1
+    },
+    "cpu_pct__min": {
+      "q50": 33.11511850534288,
+      "qhi": 48.24116456583873,
+      "direction": 1
+    },
+    "disk_used_pct__slope": {
+      "q50": 0.0004798423465718417,
+      "qhi": 0.004592707068621499,
+      "direction": 1
+    }
+  },
+  "score_formula": "F = make_features(df, window); raw = max_g clip(anchor_g * (-model[g].score_samples(F[groups[g].features]) - q50_g) / (qhi_g - q50_g), 0, 1) if groups else -model.score_samples(F[features]); score = clip(anchor * (raw - q50) / (qhi - q50), 0, 1)",
+  "created_at": "2026-09-23T14:02:38+00:00",
+  "versions": {
+    "python": "3.11.16",
+    "sklearn": "1.9.1",
+    "numpy": "2.4.6",
+    "pandas": "3.0.5"
+  },
+  "model_sha256": "eedf231588a73136cefbfebfdd5ef1da912e905f2dd1781fdd20d614c4a81e10"
+}

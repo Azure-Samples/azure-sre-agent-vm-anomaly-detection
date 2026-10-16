@@ -1,0 +1,17 @@
+[Unit]
+Description=VM anomaly demo web service
+After=network-online.target
+
+[Service]
+Type=simple
+User=demoapp
+WorkingDirectory=/opt/demo-app
+EnvironmentFile=/opt/demo-app/version.env
+ExecStart=/usr/bin/python3 /opt/demo-app/server.py
+Restart=always
+RestartSec=3
+SyslogIdentifier=demo-app
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000" width="1400" height="1000"
+     font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#1f2328">
+  <title>Incident workflow - stages 1 to 4 (regression introduced by a deployment)</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#d9700a"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a7f37"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="1000" fill="#ffffff"/>
+  <text x="700" y="26" text-anchor="middle" font-size="18" font-weight="600">Incident workflow - regression introduced by a deployment (stages 1-4)</text>
+
+  <!-- ===================== stage header bands ===================== -->
+  <rect x="180" y="40" width="420" height="30" fill="#0078d4"/>
+  <text x="390" y="60" text-anchor="middle" font-size="13" font-weight="600" fill="#ffffff">Stage 1 - Alerting</text>
+  <rect x="600" y="40" width="200" height="30" fill="#d9700a"/>
+  <text x="700" y="60" text-anchor="middle" font-size="13" font-weight="600" fill="#ffffff">Stage 2 - Interim action</text>
+  <rect x="800" y="40" width="280" height="30" fill="#b35c00"/>
+  <text x="940" y="60" text-anchor="middle" font-size="13" font-weight="600" fill="#ffffff">Stage 3 - Root cause analysis</text>
+  <rect x="1080" y="40" width="310" height="30" fill="#1a7f37"/>
+  <text x="1235" y="60" text-anchor="middle" font-size="13" font-weight="600" fill="#ffffff">Stage 4 - Permanent action</text>
+
+  <!-- stage separators -->
+  <line x1="600" y1="70" x2="600" y2="854" stroke="#d0d7de" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="800" y1="70" x2="800" y2="854" stroke="#d0d7de" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="1080" y1="70" x2="1080" y2="854" stroke="#d0d7de" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- ===================== swimlanes (7 x 112 px, top = 70) ===================== -->
+  <!-- lane 0 Developer / Deploy -->
+  <rect x="10" y="70" width="1380" height="112" fill="#fafbfc" stroke="#d0d7de"/>
+  <rect x="10" y="70" width="170" height="112" fill="#eef1f4" stroke="#d0d7de"/>
+  <text x="95" y="122" text-anchor="middle" font-size="12" font-weight="600">Developer / Deploy</text>
+  <text x="95" y="138" text-anchor="middle" font-size="10" fill="#57606a">release + deployment tooling</text>
+  <!-- lane 1 VM + Azure Monitor -->
+  <rect x="10" y="182" width="1380" height="112" fill="#f3f8fe" stroke="#d0d7de"/>
+  <rect x="10" y="182" width="170" height="112" fill="#dbe9f8" stroke="#d0d7de"/>
+  <text x="95" y="230" text-anchor="middle" font-size="12" font-weight="600" fill="#0b4f8a">VM + Azure Monitor</text>
+  <text x="95" y="246" text-anchor="middle" font-size="10" fill="#0b4f8a">workload, telemetry, alert rules</text>
+  <!-- lane 2 Detector -->
+  <rect x="10" y="294" width="1380" height="112" fill="#f3f8fe" stroke="#d0d7de"/>
+  <rect x="10" y="294" width="170" height="112" fill="#dbe9f8" stroke="#d0d7de"/>
+  <text x="95" y="342" text-anchor="middle" font-size="12" font-weight="600" fill="#0b4f8a">Detector</text>
+  <text x="95" y="358" text-anchor="middle" font-size="10" fill="#0b4f8a">Azure Functions + trained model</text>
+  <!-- lane 3 SRE Agent -->
+  <rect x="10" y="406" width="1380" height="112" fill="#fff8f0" stroke="#d0d7de"/>
+  <rect x="10" y="406" width="170" height="112" fill="#fde6cc" stroke="#d0d7de"/>
+  <text x="95" y="454" text-anchor="middle" font-size="12" font-weight="600" fill="#b35c00">Azure SRE Agent</text>
+  <text x="95" y="470" text-anchor="middle" font-size="10" fill="#b35c00">Review mode: acts only with approval</text>
+  <!-- lane 4 GitHub -->
+  <rect x="10" y="518" width="1380" height="112" fill="#f1faf3" stroke="#d0d7de"/>
+  <rect x="10" y="518" width="170" height="112" fill="#d9efdf" stroke="#d0d7de"/>
+  <text x="95" y="566" text-anchor="middle" font-size="12" font-weight="600" fill="#1a7f37">GitHub</text>
+  <text x="95" y="582" text-anchor="middle" font-size="10" fill="#1a7f37">Issue / PR / Actions</text>
+  <!-- lane 5 Coding agent -->
+  <rect x="10" y="630" width="1380" height="112" fill="#f1faf3" stroke="#d0d7de"/>
+  <rect x="10" y="630" width="170" height="112" fill="#d9efdf" stroke="#d0d7de"/>
+  <text x="95" y="678" text-anchor="middle" font-size="12" font-weight="600" fill="#1a7f37">Coding agent</text>
+  <text x="95" y="694" text-anchor="middle" font-size="10" fill="#1a7f37">Copilot</text>
+  <!-- lane 6 Human approver -->
+  <rect x="10" y="742" width="1380" height="112" fill="#fafbfc" stroke="#d0d7de"/>
+  <rect x="10" y="742" width="170" height="112" fill="#eef1f4" stroke="#d0d7de"/>
+  <text x="95" y="790" text-anchor="middle" font-size="12" font-weight="600">Human approver</text>
+  <text x="95" y="806" text-anchor="middle" font-size="10" fill="#57606a">SRE Agent Administrator</text>
+
+  <!-- ===================== Stage 1 boxes ===================== -->
+  <!-- A1 developer deploy -->
+  <rect x="195" y="94" width="175" height="64" rx="5" fill="#ffffff" stroke="#57606a" stroke-width="1.5"/>
+  <text x="203" y="110" font-weight="600">Release deployed</text>
+  <text x="203" y="124" font-size="10">a new application version is rolled</text>
+  <text x="203" y="136" font-size="10" >out through the standard deploy path</text>
+  <text x="203" y="150" font-size="10" fill="#57606a">the change carries a latent defect</text>
+
+  <!-- A2 VM -->
+  <rect x="195" y="206" width="150" height="64" rx="5" fill="#ffffff" stroke="#0078d4" stroke-width="1.5"/>
+  <text x="203" y="222" font-weight="600" fill="#0078d4">Install and restart</text>
+  <text x="203" y="236" font-size="10">service restarted on the VM,</text>
+  <text x="203" y="248" font-size="10">deployment marker written</text>
+  <text x="203" y="262" font-size="10" fill="#57606a">resource use starts to degrade</text>
+
+  <!-- A3 AMA -> LAW -->
+  <rect x="360" y="206" width="110" height="64" rx="5" fill="#ffffff" stroke="#0078d4" stroke-width="1.5"/>
+  <text x="368" y="222" font-weight="600" fill="#0078d4">Collect telemetry</text>
+  <text x="368" y="236" font-size="10">AMA on VM, 1 min</text>
+  <text x="368" y="248" font-size="10">-&gt; DCR (Perf, Syslog)</text>
+  <text x="368" y="262" font-size="10" fill="#57606a">-&gt; Log Analytics</text>
+
+  <!-- A5 alert rule -->
+  <rect x="485" y="206" width="105" height="64" rx="5" fill="#ffffff" stroke="#0078d4" stroke-width="1.5"/>
+  <text x="493" y="222" font-weight="600" fill="#0078d4">Decide to page</text>
+  <text x="493" y="236" font-size="10">scheduled KQL:</text>
+  <text x="493" y="248" font-size="10">anomaly persists</text>
+  <text x="493" y="262" font-size="10" fill="#57606a">-&gt; alert fired</text>
+
+  <!-- A4 detector -->
+  <rect x="300" y="318" width="290" height="64" rx="5" fill="#ffffff" stroke="#0078d4" stroke-width="1.5"/>
+  <text x="308" y="334" font-weight="600" fill="#0078d4">Score the telemetry (every minute)</text>
+  <text x="308" y="348" font-size="10">polls Log Analytics (Logs Query API) -&gt; features -&gt; model</text>
+  <text x="308" y="360" font-size="10">writes score, anomaly flag and top metric back via</text>
+  <text x="308" y="374" font-size="10" fill="#57606a">Logs Ingestion API -&gt; DCE -&gt; score DCR -&gt; Log Analytics</text>
+
+  <!-- A6 SRE ack -->
+  <rect x="450" y="430" width="140" height="64" rx="5" fill="#fff4e6" stroke="#d9700a" stroke-width="1.5"/>
+  <text x="458" y="446" font-weight="600" fill="#b35c00">Acknowledge</text>
+  <text x="458" y="460" font-size="10">receive the alert, open an</text>
+  <text x="458" y="472" font-size="10">incident thread, record the</text>
+  <text x="458" y="486" font-size="10">onset time</text>
+
+  <!-- ===================== Stage 2 boxes ===================== -->
+  <!-- B3 VM restart -->
+  <rect x="615" y="206" width="180" height="64" rx="5" fill="#ffffff" stroke="#0078d4" stroke-width="1.5"/>
+  <text x="623" y="222" font-weight="600" fill="#0078d4">Apply interim mitigation</text>
+  <text x="623" y="236" font-size="10">approved command run on the VM</text>
+  <text x="623" y="248" font-size="10">service healthy again</text>
+  <text x="623" y="262" font-size="10" fill="#b35c00">defect still deployed</text>
+
+  <!-- B1 triage -->
+  <rect x="615" y="430" width="185" height="64" rx="5" fill="#fff4e6" stroke="#d9700a" stroke-width="1.5"/>
+  <text x="623" y="446" font-weight="600" fill="#b35c00">Triage</text>
+  <text x="623" y="460" font-size="10">query scores, metrics and logs;</text>
+  <text x="623" y="472" font-size="10">inspect the workload state;</text>
+  <text x="623" y="486" font-size="10">propose the least-risk mitigation</text>
+
+  <!-- B2 human approval -->
+  <rect x="615" y="766" width="180" height="64" rx="5" fill="#ffffff" stroke="#57606a" stroke-width="1.5"/>
+  <text x="623" y="782" font-weight="600">Review-mode approval</text>
+  <text x="623" y="796" font-size="10">agent proposes the action and</text>
+  <text x="623" y="808" font-size="10">explains its impact; administrator</text>
+  <text x="623" y="822" font-size="10">approves in the incident thread</text>
+
+  <!-- ===================== Stage 3 boxes ===================== -->
+  <!-- C-1 investigation sources in the Azure Monitor lane -->
+  <rect x="815" y="206" width="240" height="64" rx="5" fill="#ffffff" stroke="#0078d4" stroke-width="1.5"/>
+  <text x="823" y="222" font-weight="600" fill="#0078d4">Answer the agent's questions</text>
+  <text x="823" y="236" font-size="9.5">Log Analytics: KQL over metrics, scores, logs</text>
+  <text x="823" y="248" font-size="9.5">Activity Log + Resource Graph: change history</text>
+  <text x="823" y="262" font-size="9.5" fill="#57606a">VM: approved run-command (state, logs, markers)</text>
+
+  <!-- C0 localise failing component from its logs -->
+  <rect x="815" y="318" width="240" height="64" rx="5" fill="#fff4e6" stroke="#d9700a" stroke-width="1.5"/>
+  <text x="823" y="334" font-weight="600" fill="#b35c00">Localise the failing component</text>
+  <text x="823" y="348" font-size="9.5">from host + top metric to the process whose</text>
+  <text x="823" y="360" font-size="9.5">own logs show the degradation, then its</text>
+  <text x="823" y="374" font-size="9.5" fill="#57606a">runtime state (service logs, status endpoint)</text>
+
+  <!-- C1 correlate -->
+  <rect x="815" y="430" width="122" height="64" rx="5" fill="#fff4e6" stroke="#d9700a" stroke-width="1.5"/>
+  <text x="823" y="446" font-weight="600" fill="#b35c00">Correlate onset</text>
+  <text x="823" y="460" font-size="9.5">deployment markers and</text>
+  <text x="823" y="472" font-size="9.5">activity log vs the first</text>
+  <text x="823" y="486" font-size="9.5">anomalous minute</text>
+
+  <!-- C2 code access -->
+  <rect x="945" y="430" width="110" height="64" rx="5" fill="#fff4e6" stroke="#d9700a" stroke-width="1.5"/>
+  <text x="953" y="446" font-weight="600" fill="#b35c00">Code Access (read)</text>
+  <text x="953" y="460" font-size="9.5">read the source at</text>
+  <text x="953" y="472" font-size="9.5">the deployed revision;</text>
+  <text x="953" y="486" font-size="9.5">pinpoint the defect</text>
+
+  <!-- C3 incident issue -->
+  <rect x="815" y="542" width="255" height="64" rx="5" fill="#ffffff" stroke="#1a7f37" stroke-width="1.5"/>
+  <text x="823" y="558" font-weight="600" fill="#1a7f37">Issue opened, label <tspan font-family="Consolas, Menlo, monospace">incident</tspan></text>
+  <text x="823" y="572" font-size="10">problem, evidence, root cause (file:line),</text>
+  <text x="823" y="584" font-size="10">fix plan, validation plan - the record</text>
+  <text x="823" y="598" font-size="10" fill="#57606a">that humans approve against</text>
+
+  <!-- ===================== Stage 4 boxes ===================== -->
+  <!-- D0 developer fallback -->
+  <rect x="1095" y="94" width="280" height="64" rx="5" fill="#fafbfc" stroke="#57606a" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="1103" y="110" font-weight="600">Manual fallback</text>
+  <text x="1103" y="124" font-size="10">operator deploys main by hand</text>
+  <text x="1103" y="136" font-size="10">(if Actions is unavailable) - same deploy path</text>
+  <text x="1103" y="150" font-size="10" fill="#57606a">status script to check version, metrics, scores</text>
+
+  <!-- D4 VM deploy fix -->
+  <rect x="1095" y="206" width="280" height="64" rx="5" fill="#ffffff" stroke="#0078d4" stroke-width="1.5"/>
+  <text x="1103" y="222" font-weight="600" fill="#0078d4">Deploy the fixed revision</text>
+  <text x="1103" y="236" font-size="10">same install/restart path as the original release,</text>
+  <text x="1103" y="248" font-size="10">version recorded, deployment marker written</text>
+  <text x="1103" y="262" font-size="10" fill="#57606a">resource use back to baseline</text>
+
+  <!-- D5 detector recovers -->
+  <rect x="1095" y="318" width="230" height="64" rx="5" fill="#ffffff" stroke="#0078d4" stroke-width="1.5"/>
+  <text x="1103" y="334" font-weight="600" fill="#0078d4">Scores return to normal</text>
+  <text x="1103" y="348" font-size="10">recovery itself is not flagged (one-sided</text>
+  <text x="1103" y="360" font-size="10">trend features); score below threshold</text>
+  <text x="1103" y="374" font-size="10" fill="#57606a">alert rule resolves</text>
+
+  <!-- D6 SRE verify -->
+  <rect x="1095" y="430" width="230" height="64" rx="5" fill="#fff4e6" stroke="#d9700a" stroke-width="1.5"/>
+  <text x="1103" y="446" font-weight="600" fill="#b35c00">Verify and close</text>
+  <text x="1103" y="460" font-size="10">deployed version == merged revision, metrics</text>
+  <text x="1103" y="472" font-size="10">stable, score below threshold, alert resolved</text>
+  <text x="1103" y="486" font-size="10" fill="#57606a">-&gt; close issue with evidence + approvals</text>
+
+  <!-- D3 PR -> merge -> Actions -->
+  <rect x="1095" y="542" width="280" height="64" rx="5" fill="#ffffff" stroke="#1a7f37" stroke-width="1.5"/>
+  <text x="1103" y="558" font-weight="600" fill="#1a7f37">Fix PR -&gt; review -&gt; merge to main</text>
+  <text x="1103" y="572" font-size="10">CI deploy workflow runs on merge to main</text>
+  <text x="1103" y="584" font-size="10">and verifies the deployed version</text>
+  <text x="1103" y="598" font-size="10" fill="#57606a">issue closed by the SRE Agent after verification</text>
+
+  <!-- D2 coding agent -->
+  <rect x="1095" y="654" width="280" height="64" rx="5" fill="#ffffff" stroke="#1a7f37" stroke-width="1.5"/>
+  <text x="1103" y="670" font-weight="600" fill="#1a7f37">Implement the fix</text>
+  <text x="1103" y="684" font-size="10">triggered by label <tspan font-family="Consolas, Menlo, monospace">approved</tspan>; implements the fix</text>
+  <text x="1103" y="696" font-size="10">plan from the issue, adds a regression test,</text>
+  <text x="1103" y="710" font-size="10" fill="#57606a">opens a PR referencing the issue</text>
+
+  <!-- D1 human approves -->
+  <rect x="1095" y="766" width="280" height="64" rx="5" fill="#ffffff" stroke="#57606a" stroke-width="1.5"/>
+  <text x="1103" y="782" font-weight="600">Approve the fix plan</text>
+  <text x="1103" y="796" font-size="10">human (or agent) adds label <tspan font-family="Consolas, Menlo, monospace">approved</tspan> to the issue</text>
+  <text x="1103" y="808" font-size="10">= approval boundary; later reviews and merges</text>
+  <text x="1103" y="822" font-size="10">the PR (branch protection on main)</text>
+
+  <!-- ===================== Arrows ===================== -->
+  <!-- 1 A1 -> A2 -->
+  <line x1="265" y1="158" x2="265" y2="206" stroke="#57606a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <circle cx="280" cy="182" r="9" fill="#24292f"/><text x="280" y="186" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="600">1</text>
+  <!-- 2 A2 -> A3 -->
+  <line x1="345" y1="238" x2="360" y2="238" stroke="#0078d4" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <circle cx="352" cy="196" r="9" fill="#24292f"/><text x="352" y="200" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="600">2</text>
+  <!-- 3 A3 -> A4 (Perf query by detector) -->
+  <line x1="415" y1="270" x2="415" y2="318" stroke="#0078d4" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <circle cx="400" cy="294" r="9" fill="#24292f"/><text x="400" y="298" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="600">3</text>
+  <!-- 4 A4 -> A5 (VMAnomalyScore_CL evaluated by alert) -->
+  <line x1="537" y1="318" x2="537" y2="270" stroke="#0078d4" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <circle cx="552" cy="294" r="9" fill="#24292f"/><text x="552" y="298" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="600">4</text>
+  <!-- 5 A5 -> A6 (Action Group -> SRE Agent) -->
+  <polyline points="580,270 580,300 596,300 596,415 580,415 580,430" fill="none" stroke="#d9700a" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <circle cx="596" cy="360" r="9" fill="#24292f"/><text x="596" y="364" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="600">5</text>
+  <!-- 5b A6 -> B1 -->
+  <line x1="590" y1="462" x2="615" y2="462" stroke="#d9700a" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+
+  <!-- 6 B1 -> B2 (propose restart) -->
+  <line x1="690" y1="494" x2="690" y2="766" stroke="#d9700a" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <circle cx="690" cy="630" r="9" fill="#24292f"/><text x="690" y="634" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="600">6</text>
+  <text x="698" y="700" font-size="10" fill="#b35c00">propose restart</text>
+  <!-- 7 B2 -> B3 (approved -> run-command) -->
+  <line x1="780" y1="766" x2="780" y2="270" stroke="#57606a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <circle cx="780" cy="630" r="9" fill="#24292f"/><text x="780" y="634" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="600">7</text>
+  <text x="788" y="700" font-size="10" fill="#57606a">approved -&gt; execute</text>
+  <!-- 7b B3 -> C1 (memory freed, continue RCA) -->
+  <polyline points="795,238 805,238 805,306 880,306 880,318" fill="none" stroke="#d9700a" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <!-- 7c C0 -> C1 (process identified, find what changed) -->
+  <line x1="880" y1="382" x2="880" y2="430" stroke="#d9700a" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+
+  <!-- 7d SRE Agent <-> Azure Monitor lane: on-demand investigation (stage 2 triage and stage 3 RCA) -->
+  <line x1="640" y1="430" x2="640" y2="270" stroke="#d9700a" stroke-width="1.5" stroke-dasharray="5 3" marker-start="url(#arrow-orange)" marker-end="url(#arrow-orange)"/>
+  <text x="646" y="352" font-size="9.5" fill="#b35c00">KQL, run-command</text>
+  <text x="646" y="364" font-size="9.5" fill="#b35c00">(read, on demand)</text>
+  <polyline points="1055,462 1067,462 1067,238 1055,238" fill="none" stroke="#d9700a" stroke-width="1.5" stroke-dasharray="5 3" marker-start="url(#arrow-orange)" marker-end="url(#arrow-orange)"/>
+  <line x1="1055" y1="350" x2="1067" y2="350" stroke="#d9700a" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="1079" y="300" font-size="9.5" fill="#b35c00" transform="rotate(-90 1079 300)" text-anchor="middle">KQL, Resource Graph, run-command</text>
+
+  <!-- 8 C1 -> C2 -->
+  <line x1="937" y1="462" x2="945" y2="462" stroke="#d9700a" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <circle cx="941" cy="420" r="9" fill="#24292f"/><text x="941" y="424" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="600">8</text>
+  <!-- 9 C2 -> C3 (open issue) -->
+  <line x1="1000" y1="494" x2="1000" y2="542" stroke="#d9700a" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <circle cx="1027" cy="518" r="9" fill="#24292f"/><text x="1027" y="522" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="600">9</text>
+  <!-- 10 C3 -> D1 (issue reviewed by human) -->
+  <polyline points="1012,606 1012,798 1095,798" fill="none" stroke="#1a7f37" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <circle cx="1012" cy="700" r="9" fill="#24292f"/><text x="1012" y="704" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="600">10</text>
+  <!-- 11 D1 -> D2 (approved label triggers coding agent) -->
+  <line x1="1160" y1="766" x2="1160" y2="718" stroke="#1a7f37" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <circle cx="1175" cy="742" r="9" fill="#24292f"/><text x="1175" y="746" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="600">11</text>
+  <!-- 12 D2 -> D3 (PR) -->
+  <line x1="1160" y1="654" x2="1160" y2="606" stroke="#1a7f37" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <circle cx="1175" cy="630" r="9" fill="#24292f"/><text x="1175" y="634" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="600">12</text>
+  <!-- 13 D3 -> D4 (Actions deploy) -->
+  <line x1="1350" y1="542" x2="1350" y2="270" stroke="#1a7f37" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <circle cx="1350" cy="406" r="9" fill="#24292f"/><text x="1350" y="410" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="600">13</text>
+  <text x="1362" y="390" font-size="10" fill="#1a7f37" transform="rotate(-90 1362 390)" text-anchor="start">CI deploy</text>
+  <!-- 13b D0 -> D4 dashed fallback -->
+  <line x1="1200" y1="158" x2="1200" y2="206" stroke="#57606a" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrow)"/>
+  <!-- 14 D4 -> D5 (Perf -> scores) -->
+  <line x1="1200" y1="270" x2="1200" y2="318" stroke="#0078d4" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <circle cx="1215" cy="294" r="9" fill="#24292f"/><text x="1215" y="298" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="600">14</text>
+  <!-- 15 D5 -> D6 (verify) -->
+  <line x1="1200" y1="382" x2="1200" y2="430" stroke="#d9700a" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <circle cx="1215" cy="406" r="9" fill="#24292f"/><text x="1215" y="410" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="600">15</text>
+  <!-- 16 D6 -> D3 (close issue) -->
+  <line x1="1300" y1="494" x2="1300" y2="542" stroke="#d9700a" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <circle cx="1315" cy="518" r="9" fill="#24292f"/><text x="1315" y="522" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="600">16</text>
+
+  <rect x="180" y="870" width="620" height="60" rx="5" fill="#f6f8fa" stroke="#8c959f" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="192" y="890" font-weight="600" fill="#57606a">Stages 5-6 - not implemented</text>
+  <text x="192" y="906" font-size="10" fill="#57606a">5 Horizontal deployment: identify affected hosts, roll out the reviewed fix, verify recovery</text>
+  <text x="192" y="920" font-size="10" fill="#57606a">6 Postmortem and standardization: record the incident and update operating practices</text>
+
+  <rect x="820" y="870" width="570" height="60" rx="5" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="832" y="890" font-weight="600">Legend</text>
+  <rect x="832" y="900" width="14" height="14" fill="#ffffff" stroke="#0078d4" stroke-width="1.5"/><text x="852" y="911" font-size="10">Azure service</text>
+  <rect x="932" y="900" width="14" height="14" fill="#fff4e6" stroke="#d9700a" stroke-width="1.5"/><text x="952" y="911" font-size="10">SRE Agent step</text>
+  <rect x="1042" y="900" width="14" height="14" fill="#ffffff" stroke="#1a7f37" stroke-width="1.5"/><text x="1062" y="911" font-size="10">GitHub / coding agent</text>
+  <rect x="1182" y="900" width="14" height="14" fill="#ffffff" stroke="#57606a" stroke-width="1.5"/><text x="1202" y="911" font-size="10">Human / operator</text>
+  <text x="832" y="926" font-size="10" fill="#57606a">Arrows are numbered in time order; 7 and 11 are the human approval boundaries (Review mode, label approved).</text>
+
+  <text x="700" y="960" text-anchor="middle" font-size="10" fill="#57606a">Every command on the VM is an infrastructure write and requires Review-mode approval; the Stop hook only checks the agent's final response after execution.</text>
+</svg>

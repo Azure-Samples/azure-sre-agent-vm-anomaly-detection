@@ -1,0 +1,13 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "LAW_WORKSPACE_ID": "<law-vm-anomaly-demo customer id (GUID)>",
+    "DCE_ENDPOINT": "https://dce-vm-anomaly-xxxx.eastus2-1.ingest.monitor.azure.com",
+    "DCR_IMMUTABLE_ID": "dcr-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "DCR_STREAM": "Custom-VMAnomalyScore_CL",
+    "TARGET_COMPUTER": "vm-app-01",
+    "SCORE_THRESHOLD": "0.8"
+  }
+}

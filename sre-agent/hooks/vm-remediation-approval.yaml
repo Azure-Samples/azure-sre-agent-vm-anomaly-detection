@@ -1,0 +1,16 @@
+name: vm-remediation-approval
+event_type: Stop
+activation_mode: always
+description: Confirm Review-mode approval requirements appear in remediation responses.
+hook:
+  type: prompt
+  prompt: |
+    Review the proposed final response. For any Azure infrastructure write,
+    including ALL az vm run-command invocations, service or VM restarts, VM
+    deallocation, NSG changes, and tag writes, require an explicit statement
+    that a human SRE Agent Administrator must approve it in Review mode before
+    execution. If the response claims a write occurred without recorded
+    approval, reject it. Reject any response that closes a GitHub issue or
+    merges a pull request, or claims to have done so; those decisions belong
+    to a human. Read-only Azure queries may proceed.
+    Return {"ok": true} if compliant, otherwise {"ok": false, "reason": "..."}.

@@ -1,0 +1,27 @@
+name: Dispatch approved incident
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  issues: read
+
+jobs:
+  dispatch:
+    if: github.event.label.name == 'approved' && contains(github.event.issue.labels.*.name, 'incident')
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.CODING_AGENT_TOKEN }}
+      ISSUE_NUMBER: ${{ github.event.issue.number }}
+      APPROVER: ${{ github.event.sender.login }}
+    steps:
+      - name: Dispatch fix plan
+        run: |
+          set -euo pipefail
+          : "${GH_TOKEN:?Set the CODING_AGENT_TOKEN Actions secret (user token)}"
+          gh api --method POST \
+            "repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER/assignees" \
+            -f 'assignees[]=copilot-swe-agent[bot]' >/dev/null
+          gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" \
+            --body "Approved by @$APPROVER — dispatched to Copilot. Add the \`deploy\` label to the fix PR before merging to deploy it."
